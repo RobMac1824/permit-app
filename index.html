@@ -224,13 +224,24 @@ Dedicated visual observers, safety perimeter barriers, and coordination with on-
             <p class="empty">Complete the form to generate a permit request package.</p>
           </div>
           <div class="preview-actions">
-            <button class="btn primary" id="downloadBtn" type="button" disabled>
-              Download request JSON
-            </button>
+            <div class="download-group" role="group" aria-label="Download package options">
+              <button class="btn primary" id="downloadPdfBtn" type="button" disabled>
+                Download PDF
+              </button>
+              <button class="btn ghost" id="downloadDocxBtn" type="button" disabled>
+                Download DOCX
+              </button>
+              <button class="btn ghost" id="downloadJsonBtn" type="button" disabled>
+                Download JSON
+              </button>
+            </div>
             <button class="btn ghost" id="submitBtn" type="button" disabled>
               Mark ready to submit
             </button>
           </div>
+          <p class="helper" id="packageStatus">
+            Generate a request package to enable downloads.
+          </p>
         </aside>
       </section>
 
@@ -259,6 +270,8 @@ Dedicated visual observers, safety perimeter barriers, and coordination with on-
       integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
       crossorigin=""
     ></script>
+    <script src="https://unpkg.com/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+    <script src="https://unpkg.com/docx@8.5.0/build/index.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
