@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Permit App - UAS Permit Assistant</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <div>
+        <p class="eyebrow">UAS Permit Automation</p>
+        <h1>Permit App</h1>
+        <p class="subtitle">
+          Create a ready-to-review UAS permit request package for the NYPD UAS permit
+          workflow. Enter your details once, preview the full request, and export or
+          submit when you are ready.
+        </p>
+        <div class="actions">
+          <a class="btn primary" href="#request-form">Start a request</a>
+          <a
+            class="btn ghost"
+            href="https://www.nyc.gov/site/nypd/services/law-enforcement/permits-uas-permits.page"
+            target="_blank"
+            rel="noreferrer"
+          >
+            View NYPD UAS permit page
+          </a>
+        </div>
+      </div>
+      <div class="card">
+        <h2>How it works</h2>
+        <ol>
+          <li>Capture applicant, flight, and safety details.</li>
+          <li>Auto-fill a structured request summary.</li>
+          <li>Export the request for review and submission.</li>
+        </ol>
+        <p class="note">
+          This prototype prepares data for review; you confirm before submitting through
+          the official NYPD portal.
+        </p>
+      </div>
+    </header>
+
+    <main>
+      <section id="request-form" class="grid">
+        <form class="panel" id="permitForm">
+          <h2>Applicant details</h2>
+          <div class="field">
+            <label for="fullName">Full name</label>
+            <input
+              id="fullName"
+              name="fullName"
+              type="text"
+              placeholder="Jordan Rivers"
+              value="Jordan Rivers"
+              required
+            />
+          </div>
+          <div class="field">
+            <label for="email">Email address</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              placeholder="jordan@email.com"
+              value="jordan@email.com"
+              required
+            />
+          </div>
+          <div class="field">
+            <label for="phone">Phone number</label>
+            <input
+              id="phone"
+              name="phone"
+              type="tel"
+              placeholder="(555) 123-4567"
+              value="(555) 123-4567"
+              required
+            />
+          </div>
+          <div class="field">
+            <label for="organization">Organization / Production</label>
+            <input
+              id="organization"
+              name="organization"
+              type="text"
+              placeholder="Skyline Media"
+              value="Skyline Media"
+            />
+          </div>
+
+          <h2>Flight details</h2>
+          <div class="field">
+            <label for="date">Requested flight date</label>
+            <input id="date" name="date" type="date" value="2026-02-15" required />
+          </div>
+          <div class="field">
+            <label for="time">Requested time window</label>
+            <input
+              id="time"
+              name="time"
+              type="text"
+              placeholder="9:00 AM - 1:00 PM"
+              value="9:00 AM - 1:00 PM"
+              required
+            />
+          </div>
+          <div class="field">
+            <label for="location">Location / Address</label>
+            <input
+              id="location"
+              name="location"
+              type="text"
+              placeholder="123 Main St, New York, NY"
+              value="123 Main St, New York, NY"
+              required
+            />
+          </div>
+          <div class="field">
+            <label for="coordinates">Coordinates (optional)</label>
+            <input
+              id="coordinates"
+              name="coordinates"
+              type="text"
+              placeholder="40.7128, -74.0060"
+              value="40.7128, -74.0060"
+            />
+          </div>
+          <div class="field">
+            <label for="purpose">Purpose of flight</label>
+            <textarea id="purpose" name="purpose" rows="3" placeholder="Commercial filming" required>
+Commercial filming for a real estate showcase.
+            </textarea>
+          </div>
+
+          <h2>Safety & compliance</h2>
+          <div class="field">
+            <label for="pilot">Remote pilot name / license</label>
+            <input
+              id="pilot"
+              name="pilot"
+              type="text"
+              placeholder="A. Pilot - Part 107"
+              value="A. Pilot - Part 107"
+              required
+            />
+          </div>
+          <div class="field">
+            <label for="insurance">Insurance provider + policy</label>
+            <input
+              id="insurance"
+              name="insurance"
+              type="text"
+              placeholder="AeroSure - Policy #12345"
+              value="AeroSure - Policy #12345"
+              required
+            />
+          </div>
+          <div class="field">
+            <label for="equipment">Aircraft make / model</label>
+            <input
+              id="equipment"
+              name="equipment"
+              type="text"
+              placeholder="DJI Inspire 3"
+              value="DJI Inspire 3"
+              required
+            />
+          </div>
+          <div class="field">
+            <label for="mitigation">Risk mitigation plan</label>
+            <textarea
+              id="mitigation"
+              name="mitigation"
+              rows="3"
+              placeholder="Crowd control, spotters, safety perimeter"
+              required
+            >
+Two spotters, cones for safety perimeter, and pre-flight briefing with the crew.
+            </textarea>
+          </div>
+
+          <h2>Attachments</h2>
+          <div class="field">
+            <label for="attachments">Supporting documents</label>
+            <input
+              id="attachments"
+              name="attachments"
+              type="text"
+              placeholder="COI, site map, flight plan"
+              value="COI, site map, flight plan"
+            />
+          </div>
+
+          <div class="form-actions">
+            <button class="btn primary" type="submit">Generate request package</button>
+            <button class="btn ghost" type="reset">Clear</button>
+          </div>
+        </form>
+
+        <aside class="panel preview" id="requestPreview">
+          <div class="preview-header">
+            <h2>Request preview</h2>
+            <span class="status" id="statusBadge">Draft</span>
+          </div>
+          <p class="muted">
+            Your responses appear here in the format the permit team can review before you
+            submit the official application.
+          </p>
+          <div class="preview-body" id="previewBody">
+            <p class="empty">Complete the form to generate a permit request package.</p>
+          </div>
+          <div class="preview-actions">
+            <button class="btn primary" id="downloadBtn" type="button" disabled>
+              Download request JSON
+            </button>
+            <button class="btn ghost" id="submitBtn" type="button" disabled>
+              Mark ready to submit
+            </button>
+          </div>
+        </aside>
+      </section>
+
+      <section class="panel checklist">
+        <h2>Submission checklist</h2>
+        <div class="checklist-grid">
+          <label><input type="checkbox" /> Confirm FAA Part 107 credentials</label>
+          <label><input type="checkbox" /> Verify insurance coverage meets NYPD requirements</label>
+          <label><input type="checkbox" /> Attach site map and safety plan</label>
+          <label><input type="checkbox" /> Confirm flight date/time window</label>
+          <label><input type="checkbox" /> Review communication plan</label>
+          <label><input type="checkbox" /> Submit via official NYPD permit portal</label>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        Permit App is a prototype assistant to prepare UAS permit applications. Always
+        verify requirements directly with the official NYPD guidance.
+      </p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
