@@ -1,17 +1,15 @@
 :root {
-  color-scheme: dark;
+  color-scheme: light;
   font-family: "Inter", "Segoe UI", system-ui, sans-serif;
   line-height: 1.5;
-  --primary: #38bdf8;
-  --primary-dark: #0ea5e9;
-  --surface: #0f172a;
-  --surface-alt: #0b1120;
-  --border: #1f2937;
-  --text: #e2e8f0;
-  --muted: #94a3b8;
-  --success: #22c55e;
-  --card: #111827;
-  --shadow: rgba(15, 23, 42, 0.6);
+  --primary: #1d4ed8;
+  --primary-dark: #1e40af;
+  --surface: #ffffff;
+  --surface-alt: #f8fafc;
+  --border: #e2e8f0;
+  --text: #0f172a;
+  --muted: #64748b;
+  --success: #16a34a;
 }
 
 * {
@@ -20,7 +18,7 @@
 
 body {
   margin: 0;
-  background: radial-gradient(circle at top, #111827, var(--surface-alt));
+  background: var(--surface-alt);
   color: var(--text);
 }
 
@@ -29,8 +27,7 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
   padding: 3rem 6vw 2rem;
-  background: linear-gradient(135deg, #0b1120, #111827 55%, #0f172a);
-  border-bottom: 1px solid var(--border);
+  background: linear-gradient(135deg, #e0f2fe, #f8fafc 55%);
 }
 
 .eyebrow {
@@ -73,8 +70,8 @@ h1 {
 
 .btn.primary {
   background: var(--primary);
-  color: #031525;
-  box-shadow: 0 10px 22px rgba(14, 165, 233, 0.35);
+  color: #fff;
+  box-shadow: 0 8px 18px rgba(37, 99, 235, 0.2);
 }
 
 .btn.primary:hover {
@@ -85,19 +82,19 @@ h1 {
 .btn.ghost {
   background: transparent;
   color: var(--primary);
-  border-color: rgba(56, 189, 248, 0.4);
+  border-color: var(--primary);
 }
 
 .btn.ghost:hover {
-  background: rgba(56, 189, 248, 0.12);
+  background: rgba(37, 99, 235, 0.08);
 }
 
 .card {
-  background: var(--card);
+  background: var(--surface);
   border-radius: 1rem;
   padding: 1.5rem;
   border: 1px solid var(--border);
-  box-shadow: 0 16px 30px var(--shadow);
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
 }
 
 .note {
@@ -121,11 +118,11 @@ main {
 }
 
 .panel {
-  background: var(--card);
+  background: var(--surface);
   border-radius: 1rem;
   border: 1px solid var(--border);
   padding: 1.5rem;
-  box-shadow: 0 12px 26px var(--shadow);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
 }
 
 .panel h2 {
@@ -144,15 +141,13 @@ main {
 .field textarea {
   padding: 0.6rem 0.75rem;
   border-radius: 0.6rem;
-  border: 1px solid #1f2937;
-  background: #0b1220;
-  color: var(--text);
+  border: 1px solid var(--border);
   font-size: 0.95rem;
 }
 
 .field input:focus,
 .field textarea:focus {
-  outline: 2px solid rgba(56, 189, 248, 0.25);
+  outline: 2px solid rgba(37, 99, 235, 0.2);
   border-color: var(--primary);
 }
 
@@ -180,7 +175,7 @@ main {
   border-radius: 999px;
   font-size: 0.75rem;
   font-weight: 600;
-  background: rgba(148, 163, 184, 0.16);
+  background: rgba(148, 163, 184, 0.2);
   color: var(--muted);
 }
 
@@ -194,10 +189,10 @@ main {
 }
 
 .preview-body {
-  border: 1px dashed #1f2937;
+  border: 1px dashed var(--border);
   border-radius: 0.75rem;
   padding: 1rem;
-  background: #0b1220;
+  background: var(--surface-alt);
   min-height: 260px;
 }
 
@@ -226,7 +221,7 @@ main {
 }
 
 .checklist {
-  background: linear-gradient(135deg, rgba(30, 41, 59, 0.6), rgba(15, 23, 42, 0.9));
+  background: linear-gradient(135deg, #fff7ed, #ffffff 60%);
 }
 
 .checklist-grid {
@@ -239,7 +234,6 @@ footer {
   padding: 2rem 6vw 3rem;
   color: var(--muted);
   font-size: 0.9rem;
-  border-top: 1px solid var(--border);
 }
 
 @media (max-width: 800px) {
