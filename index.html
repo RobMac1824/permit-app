@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Permit App - UAS Permit Assistant</title>
     <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
   </head>
   <body>
     <header class="hero">
@@ -48,65 +54,155 @@
           <h2>Applicant details</h2>
           <div class="field">
             <label for="fullName">Full name</label>
-            <input id="fullName" name="fullName" type="text" placeholder="Jordan Rivers" required />
+            <input
+              id="fullName"
+              name="fullName"
+              type="text"
+              placeholder="Jordan Rivers"
+              value="Jordan Rivers"
+              required
+            />
           </div>
           <div class="field">
             <label for="email">Email address</label>
-            <input id="email" name="email" type="email" placeholder="jordan@email.com" required />
+            <input
+              id="email"
+              name="email"
+              type="email"
+              placeholder="jordan@email.com"
+              value="jordan.rivers@skylinemedia.com"
+              required
+            />
           </div>
           <div class="field">
             <label for="phone">Phone number</label>
-            <input id="phone" name="phone" type="tel" placeholder="(555) 123-4567" required />
+            <input
+              id="phone"
+              name="phone"
+              type="tel"
+              placeholder="(555) 123-4567"
+              value="(212) 555-0147"
+              required
+            />
           </div>
           <div class="field">
             <label for="organization">Organization / Production</label>
-            <input id="organization" name="organization" type="text" placeholder="Skyline Media" />
+            <input
+              id="organization"
+              name="organization"
+              type="text"
+              placeholder="Skyline Media"
+              value="Skyline Media"
+            />
           </div>
 
           <h2>Flight details</h2>
           <div class="field">
             <label for="date">Requested flight date</label>
-            <input id="date" name="date" type="date" required />
+            <input id="date" name="date" type="date" value="2024-11-15" required />
           </div>
           <div class="field">
             <label for="time">Requested time window</label>
-            <input id="time" name="time" type="text" placeholder="9:00 AM - 1:00 PM" required />
+            <input
+              id="time"
+              name="time"
+              type="text"
+              placeholder="9:00 AM - 1:00 PM"
+              value="9:00 AM - 1:00 PM"
+              required
+            />
           </div>
           <div class="field">
             <label for="location">Location / Address</label>
-            <input id="location" name="location" type="text" placeholder="123 Main St, New York, NY" required />
+            <input
+              id="location"
+              name="location"
+              type="text"
+              placeholder="123 Main St, New York, NY"
+              value="1100 5th Ave, New York, NY 10128"
+              required
+            />
           </div>
           <div class="field">
-            <label for="coordinates">Coordinates (optional)</label>
-            <input id="coordinates" name="coordinates" type="text" placeholder="40.7128, -74.0060" />
+            <label for="coordinates">Coordinates (auto-filled from address)</label>
+            <input
+              id="coordinates"
+              name="coordinates"
+              type="text"
+              placeholder="40.7128, -74.0060"
+              value="40.7813, -73.9735"
+              readonly
+            />
+          </div>
+          <div class="field">
+            <label for="map">Map preview</label>
+            <div id="map" class="map-tile" role="img" aria-label="Map preview"></div>
+            <p class="helper" id="mapStatus">Map updates from the address above.</p>
           </div>
           <div class="field">
             <label for="purpose">Purpose of flight</label>
-            <textarea id="purpose" name="purpose" rows="3" placeholder="Commercial filming" required></textarea>
+            <textarea id="purpose" name="purpose" rows="3" placeholder="Commercial filming" required>
+Commercial filming for a documentary segment.
+            </textarea>
           </div>
 
           <h2>Safety & compliance</h2>
           <div class="field">
             <label for="pilot">Remote pilot name / license</label>
-            <input id="pilot" name="pilot" type="text" placeholder="A. Pilot - Part 107" required />
+            <input
+              id="pilot"
+              name="pilot"
+              type="text"
+              placeholder="A. Pilot - Part 107"
+              value="Avery Pilot — Part 107"
+              required
+            />
           </div>
           <div class="field">
             <label for="insurance">Insurance provider + policy</label>
-            <input id="insurance" name="insurance" type="text" placeholder="AeroSure - Policy #12345" required />
+            <input
+              id="insurance"
+              name="insurance"
+              type="text"
+              placeholder="AeroSure - Policy #12345"
+              value="AeroSure — Policy #NY-20458"
+              required
+            />
           </div>
           <div class="field">
             <label for="equipment">Aircraft make / model</label>
-            <input id="equipment" name="equipment" type="text" placeholder="DJI Inspire 3" required />
+            <input
+              id="equipment"
+              name="equipment"
+              type="text"
+              placeholder="DJI Inspire 3"
+              value="DJI Inspire 3"
+              required
+            />
           </div>
           <div class="field">
             <label for="mitigation">Risk mitigation plan</label>
-            <textarea id="mitigation" name="mitigation" rows="3" placeholder="Crowd control, spotters, safety perimeter" required></textarea>
+            <textarea
+              id="mitigation"
+              name="mitigation"
+              rows="3"
+              placeholder="Crowd control, spotters, safety perimeter"
+              required
+            >
+Dedicated visual observers, safety perimeter barriers, and coordination with on-site security.
+            </textarea>
           </div>
 
           <h2>Attachments</h2>
           <div class="field">
             <label for="attachments">Supporting documents</label>
-            <input id="attachments" name="attachments" type="text" placeholder="COI, site map, flight plan" />
+            <input
+              id="attachments"
+              name="attachments"
+              type="text"
+              placeholder="COI, site map, flight plan"
+              value="COI, site map, flight plan, safety briefing"
+            />
           </div>
 
           <div class="form-actions">
@@ -158,6 +254,11 @@
       </p>
     </footer>
 
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
     <script src="script.js"></script>
   </body>
 </html>

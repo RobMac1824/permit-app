@@ -3,6 +3,13 @@ const previewBody = document.getElementById("previewBody");
 const statusBadge = document.getElementById("statusBadge");
 const downloadBtn = document.getElementById("downloadBtn");
 const submitBtn = document.getElementById("submitBtn");
+const locationInput = document.getElementById("location");
+const coordinatesInput = document.getElementById("coordinates");
+const mapStatus = document.getElementById("mapStatus");
+
+let map;
+let marker;
+const defaultCoords = { lat: 40.7813, lon: -73.9735 };
 
 const buildPreview = (data) => {
   return `
@@ -53,6 +60,92 @@ const updatePreview = () => {
 
 form.addEventListener("input", updatePreview);
 
+const initMap = () => {
+  if (map || !window.L) {
+    return;
+  }
+
+  map = L.map("map", {
+    zoomControl: true,
+    scrollWheelZoom: false,
+  });
+
+  L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
+    attribution:
+      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+  }).addTo(map);
+
+  marker = L.marker([defaultCoords.lat, defaultCoords.lon]).addTo(map);
+  map.setView([defaultCoords.lat, defaultCoords.lon], 14);
+};
+
+const setCoordinates = (lat, lon) => {
+  coordinatesInput.value = `${lat.toFixed(6)}, ${lon.toFixed(6)}`;
+  if (marker) {
+    marker.setLatLng([lat, lon]);
+  }
+  if (map) {
+    map.setView([lat, lon], 15);
+  }
+};
+
+const geocodeAddress = async (address) => {
+  const endpoint = `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${encodeURIComponent(
+    address
+  )}`;
+  const response = await fetch(endpoint, {
+    headers: {
+      "Accept-Language": "en",
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error("Geocoding failed.");
+  }
+
+  const results = await response.json();
+  if (!results.length) {
+    throw new Error("No results.");
+  }
+
+  return {
+    lat: parseFloat(results[0].lat),
+    lon: parseFloat(results[0].lon),
+    displayName: results[0].display_name,
+  };
+};
+
+const updateMapFromAddress = async () => {
+  const address = locationInput.value.trim();
+  if (!address) {
+    mapStatus.textContent = "Enter an address to update the map.";
+    return;
+  }
+
+  mapStatus.textContent = "Looking up address…";
+
+  try {
+    const result = await geocodeAddress(address);
+    setCoordinates(result.lat, result.lon);
+    mapStatus.textContent = `Geocoded to: ${result.displayName}`;
+    updatePreview();
+  } catch (error) {
+    mapStatus.textContent = "Unable to find that address. Please refine it.";
+  }
+};
+
+const debounce = (callback, delay = 600) => {
+  let timeoutId;
+  return (...args) => {
+    window.clearTimeout(timeoutId);
+    timeoutId = window.setTimeout(() => callback(...args), delay);
+  };
+};
+
+const debouncedMapUpdate = debounce(updateMapFromAddress, 700);
+
+locationInput.addEventListener("input", debouncedMapUpdate);
+
 form.addEventListener("submit", (event) => {
   event.preventDefault();
   updatePreview();
@@ -77,4 +170,7 @@ submitBtn.addEventListener("click", () => {
   submitBtn.textContent = "Ready for NYPD submission";
 });
 
+initMap();
+setCoordinates(defaultCoords.lat, defaultCoords.lon);
+updateMapFromAddress();
 updatePreview();
