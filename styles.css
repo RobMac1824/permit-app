@@ -1,15 +1,16 @@
 :root {
-  color-scheme: light;
+  color-scheme: dark;
   font-family: "Inter", "Segoe UI", system-ui, sans-serif;
   line-height: 1.5;
-  --primary: #1d4ed8;
-  --primary-dark: #1e40af;
-  --surface: #ffffff;
-  --surface-alt: #f8fafc;
-  --border: #e2e8f0;
-  --text: #0f172a;
-  --muted: #64748b;
-  --success: #16a34a;
+  --primary: #38bdf8;
+  --primary-dark: #0ea5e9;
+  --surface: #0f172a;
+  --surface-alt: #020617;
+  --border: #1e293b;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --success: #22c55e;
+  --shadow: rgba(2, 6, 23, 0.6);
 }
 
 * {
@@ -27,7 +28,7 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
   padding: 3rem 6vw 2rem;
-  background: linear-gradient(135deg, #e0f2fe, #f8fafc 55%);
+  background: linear-gradient(135deg, #020617, #0f172a 55%);
 }
 
 .eyebrow {
@@ -70,8 +71,8 @@ h1 {
 
 .btn.primary {
   background: var(--primary);
-  color: #fff;
-  box-shadow: 0 8px 18px rgba(37, 99, 235, 0.2);
+  color: #0f172a;
+  box-shadow: 0 8px 18px rgba(14, 165, 233, 0.3);
 }
 
 .btn.primary:hover {
@@ -86,7 +87,7 @@ h1 {
 }
 
 .btn.ghost:hover {
-  background: rgba(37, 99, 235, 0.08);
+  background: rgba(56, 189, 248, 0.12);
 }
 
 .card {
@@ -94,7 +95,7 @@ h1 {
   border-radius: 1rem;
   padding: 1.5rem;
   border: 1px solid var(--border);
-  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+  box-shadow: 0 10px 25px var(--shadow);
 }
 
 .note {
@@ -122,7 +123,7 @@ main {
   border-radius: 1rem;
   border: 1px solid var(--border);
   padding: 1.5rem;
-  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+  box-shadow: 0 8px 20px var(--shadow);
 }
 
 .panel h2 {
@@ -143,11 +144,13 @@ main {
   border-radius: 0.6rem;
   border: 1px solid var(--border);
   font-size: 0.95rem;
+  background: #0b1220;
+  color: var(--text);
 }
 
 .field input:focus,
 .field textarea:focus {
-  outline: 2px solid rgba(37, 99, 235, 0.2);
+  outline: 2px solid rgba(56, 189, 248, 0.3);
   border-color: var(--primary);
 }
 
@@ -175,7 +178,7 @@ main {
   border-radius: 999px;
   font-size: 0.75rem;
   font-weight: 600;
-  background: rgba(148, 163, 184, 0.2);
+  background: rgba(148, 163, 184, 0.16);
   color: var(--muted);
 }
 
@@ -192,7 +195,7 @@ main {
   border: 1px dashed var(--border);
   border-radius: 0.75rem;
   padding: 1rem;
-  background: var(--surface-alt);
+  background: #0b1220;
   min-height: 260px;
 }
 
@@ -221,7 +224,7 @@ main {
 }
 
 .checklist {
-  background: linear-gradient(135deg, #fff7ed, #ffffff 60%);
+  background: linear-gradient(135deg, #0b1220, #0f172a 60%);
 }
 
 .checklist-grid {
@@ -234,6 +237,23 @@ footer {
   padding: 2rem 6vw 3rem;
   color: var(--muted);
   font-size: 0.9rem;
+}
+
+.map-tile {
+  height: 200px;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.helper {
+  margin: 0.5rem 0 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+input[type="checkbox"] {
+  accent-color: var(--primary);
 }
 
 @media (max-width: 800px) {
